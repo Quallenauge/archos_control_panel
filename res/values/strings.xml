@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Archos Control Panel</string>
+    <string name="service_not_connected">service not connected</string>
+    <string name="service_connected">service connected</string>
+    <string name="deep_sleep">deep sleep</string>
+    <string name="usb_dongle">3g dongle</string>
+</resources>

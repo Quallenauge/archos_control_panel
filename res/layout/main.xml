@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent" >
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10px">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/service_not_connected"
+                android:id="@+id/serviceConnectionStatus" android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
+                android:gravity="center"/>
+
+        <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/deep_sleep"
+                android:id="@+id/deepSleepStatus" android:layout_alignLeft="@+id/serviceConnectionStatus"
+                android:layout_alignParentTop="true" android:layout_alignRight="@+id/serviceConnectionStatus"/>
+
+        <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usb_dongle"
+                android:id="@+id/usbDongleStatus" android:layout_alignLeft="@+id/serviceConnectionStatus"
+                android:layout_below="@+id/deepSleepStatus" android:layout_alignRight="@+id/serviceConnectionStatus"/>
+
+    </RelativeLayout>
+</LinearLayout>
+
