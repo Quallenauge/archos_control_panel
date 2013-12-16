@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 import pl.yproject.archos.common.RilControl;
 import pl.yproject.archos.common.ServiceBinder;
+import pl.yproject.archos.intents.StartIntent;
 
 import java.io.IOException;
 
@@ -26,6 +27,7 @@ public class ArchosControlService extends Service {
     public static final String DEEP_SLEEP_STATUS_PREFS_NAME = "deepSleepStatus";
     public static final String SU_BINARY = "/system/bin/su";
 
+
     private IBinder binder;
     private SharedPreferences preferences;
     private Boolean deepSleep = false;
@@ -40,8 +42,15 @@ public class ArchosControlService extends Service {
     private void init() {
         rilControl = new RilControl(this);
         preferences = getSharedPreferences(PREFERENCES_NAME, PREFERENCES_MODE);
-        reloadPreferences();
         Log.d(getClass().getName(), "ArchosControlService started");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent.getBooleanExtra(StartIntent.BOOTED_EXTRA, false)) {
+            reloadPreferences();
+        }
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override

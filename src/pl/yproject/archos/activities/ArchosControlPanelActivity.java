@@ -33,7 +33,7 @@ public class ArchosControlPanelActivity extends Activity implements Connectable<
     }
 
     private void init() {
-        Log.d(getClass().getName(), "ArchosControlPanel Activity");
+        Log.d(getLocalClassName(), "ArchosControlPanel Activity");
         preferences = getSharedPreferences(ArchosControlService.PREFERENCES_NAME, ArchosControlService.PREFERENCES_MODE);
         bindService();
         initViews();

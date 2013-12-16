@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import pl.yproject.archos.intents.StartIntent;
 import pl.yproject.archos.services.ArchosControlService;
 
 /**
@@ -15,7 +16,8 @@ import pl.yproject.archos.services.ArchosControlService;
 public class StartupReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(getClass().getName(),"ArchosControll Started");
-        Intent service = new Intent(context, ArchosControlService.class);
+        StartIntent service = new StartIntent(context, ArchosControlService.class);
+        service.putExtra(StartIntent.BOOTED_EXTRA, true);
         context.startService(service);
     }
 }
