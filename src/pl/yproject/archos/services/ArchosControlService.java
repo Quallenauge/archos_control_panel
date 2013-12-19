@@ -47,7 +47,7 @@ public class ArchosControlService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.getBooleanExtra(StartIntent.BOOTED_EXTRA, false)) {
+        if (intent!=null && intent.getBooleanExtra(StartIntent.BOOTED_EXTRA, false)) {
             reloadPreferences();
         }
         return super.onStartCommand(intent, flags, startId);
@@ -86,7 +86,7 @@ public class ArchosControlService extends Service {
 
     private void setDeepSleepMode() {
         try {
-            Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c", DEEP_SLEEP_BINARY + " " + (deepSleep ? "1" : "0") + "\""});
+            Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c", DEEP_SLEEP_BINARY + " " + (deepSleep ? "1" : "0")});
             Toast.makeText(this, "Deep sleep toggled " + (deepSleep ? "on!" : "off!"), Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             Toast.makeText(this, "Error changing deep sleep status!", Toast.LENGTH_LONG).show();
@@ -96,7 +96,10 @@ public class ArchosControlService extends Service {
     private void setUsbDongleMode() {
         rilControl.stopRil();
         try {
-            Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c", "echo " + (usbDongle ? "1" : "0") + " >" + SYSFS_RFKILL_ENTRY});
+            //Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c ", "/system/bin/set3GPortState" + " " + (usbDongle ? "1" : "0")});
+            //Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c ", "setprop ctl.start set3GPortState:" + (usbDongle ? "1" : "0")});
+            // Runtime.getRuntime().exec(new String[] {"setprop ctl.start set3GPortState:" + (usbDongle ? "1" : "0")});
+	    SystemPropertiesProxy.set(this.getApplicationContext(), "ctl.start", "set3GPortState:"+ (usbDongle ? "1" : "0"));
             Toast.makeText(this, "3G dongle toggled " + (usbDongle ? "on!" : "off!"), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Toast.makeText(this, "Error changing 3G dongle status!", Toast.LENGTH_LONG).show();
