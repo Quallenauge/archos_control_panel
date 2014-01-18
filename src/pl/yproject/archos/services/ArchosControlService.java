@@ -97,9 +97,9 @@ public class ArchosControlService extends Service {
         rilControl.stopRil();
         try {
             //Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c ", "/system/bin/set3GPortState" + " " + (usbDongle ? "1" : "0")});
-            //Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c ", "setprop ctl.start set3GPortState:" + (usbDongle ? "1" : "0")});
+            Runtime.getRuntime().exec(new String[] {SU_BINARY, "-c", "/system/bin/setprop ctl.start set3GPortState" +":" + (usbDongle ? "1" : "0")});
             // Runtime.getRuntime().exec(new String[] {"setprop ctl.start set3GPortState:" + (usbDongle ? "1" : "0")});
-	    SystemPropertiesProxy.set(this.getApplicationContext(), "ctl.start", "set3GPortState:"+ (usbDongle ? "1" : "0"));
+            // SystemPropertiesProxy.set(this.getApplicationContext(), "ctl.start", "set3GPortState:"+ (usbDongle ? "1" : "0"));
             Toast.makeText(this, "3G dongle toggled " + (usbDongle ? "on!" : "off!"), Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Toast.makeText(this, "Error changing 3G dongle status!", Toast.LENGTH_LONG).show();
